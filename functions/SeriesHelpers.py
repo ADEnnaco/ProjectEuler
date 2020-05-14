@@ -47,3 +47,36 @@ def get_fibonacci(n=1, limit=None):
         return Fn
     else:
         print("ERROR: get_fibonacci received invalid input.")
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+def get_primes(limit):
+    """
+    Generate a list of all prime numbers less than or equal to the given limit.
+    The algorithm for Sieve of Eratosthenes  is implemented.
+
+    Parameters
+    ----------
+    limit : integer or float
+        The inclusive upper limit on primes to generate.
+
+    Returns
+    -------
+    primes: list
+        The prime numbers in ascending order less than or equal to 'limit'.
+
+    """
+    primes = []
+    check = [True for x in range(limit)]
+    check[0:1] = False, False
+    i = 2
+    while(i * i < limit):
+      if check[i] == True:
+        for j in range(2 * i, limit + 1, i):
+          check[j] = False
+      i += 1
+    
+    for i in range(limit + 1):
+      if check[i]:
+        primes.append(i)
+        
+    return primes
