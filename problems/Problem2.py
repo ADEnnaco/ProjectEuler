@@ -21,7 +21,7 @@ import time
 start_time = time.time()
 
 from math import floor
-from functions.SeriesHelpers import get_fibonacci
+from functions.sequences import get_fibonacci
 
 limit = 4e6
 Fn, n = get_fibonacci(limit=limit)

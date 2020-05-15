@@ -14,7 +14,7 @@ import time
 start_time = time.time()
 
 from math import sqrt
-from functions.SeriesHelpers import get_primes
+from functions.sequences import get_primes
 
 answer = 600851475143
 limit = int(sqrt(answer))

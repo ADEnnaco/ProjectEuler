@@ -7,7 +7,7 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 """
 import time
 start_time = time.time()
-from functions.SumHelpers import sum_multiples
+from functions.summation import sum_multiples
 
 # S(3 or 5) = S(3) + S(5) - S(3 and 5)
 # where S(3 and 5) = S(15)

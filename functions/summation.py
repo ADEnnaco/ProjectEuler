@@ -1,57 +1,34 @@
+# -*- coding: utf-8 -*-
 # SumHelpers.py>
 """
-Helper functions used to solve ProjectEuler problems.
+Functions relating to the sums of sequences of numbers.
 """
-
+from functions.integers import largest_multiple_less_than
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
-def sum_integers(n):
+def sum_integers(n_upper, n_lower=1):
     """
-    Calculates the sum of the first n integers.
+    Calculates the sum of the integers between an inclusive upper and lower 
+    limit.
 
     Parameters
     ----------
-    n : integer
-        The number of integers to sum.
-
+    n_upper : integer
+        The inclusive upper limit of the integers to be summed.
+    n_lower : integer, optional (default is 1)
+        The inclusive lower limit of the integers to be summed.
     Returns
     -------
     sum: integer
-        The sum of the first n integers, starting with 1
+        The sum of the integers between n_upper and n_lower, inclusive.
 
     """
-    if isinstance(n, int):
-        sum_ = int(n * (n + 1) / 2)
+    if all(map(lambda x: isinstance(x, int), [n_upper, n_lower])):
+        sum_ = int((n_upper + n_lower) * (n_upper - n_lower + 1) / 2)
         return sum_
     else:
-        print("ERROR: sum_integers received invalid input.")
-#-----------------------------------------------------------------------------
-#-----------------------------------------------------------------------------
-def largest_multiple_less_than(base, limit):
-    """
-    Finds the largest multiple strictly less than the indicated limit.
-
-    Parameters
-    ----------
-    base : integer
-        The integer you want to find a multiple of.
-    limit : integer or float
-        The returned value is the largest multiple strictly less this value.
-
-    Returns
-    -------
-    multiple: integer
-        The largest multiple of 'base' that is strictly less than 'limit'.
-
-    """
-    if isinstance(base, int) and isinstance(limit, (int, float)):
-        if limit % base == 0:
-            multiple = int(limit - base)
-        else: 
-            multiple = int(limit - (limit % base))
-        return multiple
-    else:
-        print("ERROR: largest_multiple_less_than received invalid input.")
+        print("ERROR: sum_integers received invalid input.\nREASON: n_upper",
+              "and n_lower must both be integers.")
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 def sum_multiples(base, count=1, limit=None):
@@ -79,11 +56,12 @@ def sum_multiples(base, count=1, limit=None):
     """
     if limit != None:
         count = None
-    if isinstance(limit, (int, float)):
+    if isinstance(base, int) and isinstance(limit, (int, float)):
         multiple = largest_multiple_less_than(base, limit)
         count = int(multiple / base)
-    if isinstance(count, int):
+    if all(map(lambda x: isinstance(x, int), [base, count])):
         sum_  = base * sum_integers(count)
         return sum_
     else:
-        print("ERROR: sum_multiples received invalid input.")
+        print("ERROR: sum_multiples received invalid input.\nREASON: base and",
+              "count must be integers, and limit must be numeric.")
