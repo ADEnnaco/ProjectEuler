@@ -13,11 +13,10 @@ Then we return the largest of these that is a factor.
 import time
 start_time = time.time()
 
-from math import sqrt
 from functions.sequences import get_primes
 
 answer = 600851475143
-limit = int(sqrt(answer))
+limit = int(answer ** 0.5)
 primes = get_primes(limit)
 i = len(primes) - 1
 while i >= 0:
