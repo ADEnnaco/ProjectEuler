@@ -43,7 +43,7 @@ def prime_factorize(n):
         multiplicities = []
         
         # generate list of potential prime factors
-        primes = get_primes(n / 2)
+        primes = get_primes(n ** 0.5)
         
         # decompose n by dividing out primes
         for prime in primes:
@@ -56,10 +56,10 @@ def prime_factorize(n):
                 multiplicities.append(multiplicity)
             if n == 1:
                 break
-        if factors == []:
-            return [n], [1]
-        else:
-            return factors, multiplicities
+        if n > 1:
+            factors.append(n)
+            multiplicities.append(1)
+        return factors, multiplicities
     else:
         print("ERROR: prime_factorization received invalid input.\nReason:",
               "n must be an integer greater than 1.")

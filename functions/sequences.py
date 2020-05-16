@@ -24,32 +24,70 @@ def get_primes(limit):
     """
     if isinstance(limit, (int, float)) and limit >= 2:
         limit = int(limit)
-        primes = []
-        check = [True for x in range(limit)]
-        check[0:1] = False, False
-        i = 2
-        while(i * i < limit):
-          if check[i] == True:
-            for j in range(2 * i, limit + 1, i):
-              check[j] = False
-          i += 1
-        
-        for i in range(limit + 1):
-          if check[i]:
-            primes.append(i)
-            
+        if limit == 2:
+            return [2]
+        elif limit <= 4:
+            return [2, 3]
+        done = False
+        primes = [2, 3]
+        start = 5
+        while not done:
+            next_start = primes[-1] ** 2 + 2
+            if next_start > limit:
+                next_start = limit + 1
+                done = True
+            sieve = list(range(start, next_start, 2))
+            primes = primes + eratosthene_sieve(primes, sieve)
+            start = next_start
         return primes
     else:
         print("ERROR: get_primes received invalid input.\nREASON: limit must",
               "be numeric and no less than 2.")
+
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+def eratosthene_sieve(primes, sieve):
+    """
+    Uses a list of prime numbers to perform the Eratosthene Sieve algorithm on
+    a list of odd integers. Should only be called by get_primes.
+
+    Parameters
+    ----------
+    primes : list of integers
+        A complete list of prime numbers in ascending order up to some maximum
+        value.
+    sieve : list of integers
+        A list of consecutive odd integers up to and including the square of
+        the largest prime number in primes.
+
+    Returns
+    -------
+    sieve : list of integers
+        The contents of sieve, reduced to only prime numbers.
+
+    """
+    check = [True for x in sieve]
+    for i in range(1, len(primes)):
+        if primes[i] ** 2 > sieve[0]:
+            start_index = int((primes[i] ** 2 - sieve[0]) / 2)
+            if start_index >= len(sieve):
+                break
+        else:
+            for j in range(min(primes[i],len(sieve))):
+                if sieve[j] % primes[i] == 0:
+                    check[j] = False
+                    start_index = j + primes[i]
+                    break
+        for j in range(start_index,len(sieve),primes[i]):
+            check[j] = False
+    sieve = [sieve[x] for x in range(len(check)) if check[x] == True]
+    return sieve
+
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 def get_nprimes(n):
     """
-    Generate a list of the first n prime numbers. The algorithm for Sieve of 
-    Eratosthenes  is implemented using an upper limit of:
-        n * (ln(n) + ln(ln(n)))
-    for any n >= 5.
+    Generate a list of the first n prime numbers.
 
     Parameters
     ----------
@@ -62,6 +100,8 @@ def get_nprimes(n):
         The first n prime numbers, in ascending order.
 
     """
+    # The algorithm for Sieve of Eratosthenes is implemented using an upper
+    # limit of n * (log n + log log n) for any n >= 5.
     if isinstance(n, int) and n > 0:
         if n >= 6:
             limit = n * (math.log(n) + math.log(math.log(n)))
@@ -131,3 +171,46 @@ def get_fibonacci(n=1, limit=None):
               "must be a positive number or n must be a positive integer.")
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
+def get_primes2(limit):
+    """
+    Generate a list of all prime numbers less than or equal to the given limit.
+    The algorithm for Sieve of Eratosthenes  is implemented.
+
+    Parameters
+    ----------
+    limit : integer or float
+        The inclusive upper limit on primes to generate.
+
+    Returns
+    -------
+    primes: list
+        The prime numbers, in ascending order, less than or equal to 'limit'.
+
+    """
+    if isinstance(limit, (int, float)) and limit >= 2:
+        limit = int(limit)
+        primes = []
+        check = [True for x in range(limit)]
+        check[0:1] = False, False
+        i = 2
+        while(i * i < limit):
+          if check[i] == True:
+            for j in range(2 * i, limit + 1, i):
+              check[j] = False
+          i += 1
+        
+        for i in range(limit + 1):
+          if check[i]:
+            primes.append(i)
+            
+        return primes
+    else:
+        print("ERROR: get_primes2 received invalid input.\nREASON: limit must",
+              "be numeric and no less than 2.")
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+def main():
+    get_primes(15 ** 0.5)
+
+if __name__ == "__main__":
+    main()
