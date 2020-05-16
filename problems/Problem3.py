@@ -5,25 +5,39 @@ The prime factors of 13195 are 5, 7, 13 and 29.
 
 What is the largest prime factor of the number 600851475143?
 """
-
-"""
-We find all of the prime numbers less than the square root of 600851475143.
-Then we return the largest of these that is a factor.
-"""
 import time
-start_time = time.time()
 
-from functions.sequences import get_primes
+def main():
+    start_time = time.time()
+    
+    num = 600851475143
+    answer = 2
+    
+    # remove all factors of 2
+    while num&1 == 0:
+        num = num / 2
+    
+    # check if number was a power of 2
+    if num == 1:
+        total_time = time.time()-start_time
+        print("The answer is {}.\nCalculation took {}s.".format(answer,
+                                                                 total_time))
+    
+    # remove higher prime factors
+    i = 3
+    while i * i <= num:
+        while num % i == 0:
+            answer = i
+            num = num / i
+        i += 2
+    
+    # checks for fringe case of num = 5 or 7    
+    if num > answer:
+        answer = int(num)
+    
+    total_time = time.time()-start_time
+    print("The answer is {}.\nCalculation took {}s.".format(answer,
+                                                             total_time))
 
-answer = 600851475143
-limit = int(answer ** 0.5)
-primes = get_primes(limit)
-i = len(primes) - 1
-while i >= 0:
-    if answer % primes[i] == 0:
-        answer = primes[i]
-        break
-    i -= 1
-
-total_time = time.time()-start_time
-print("The answer is {}.\nCalculation took {}ms.".format(answer, total_time))
+if __name__ == "__main__":
+    main()

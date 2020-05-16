@@ -17,16 +17,22 @@ This means that the sum of the even Fibonacci numbers up to F(n) will be half
 the sum of the first k Fibonacci numbers where F(k) is the largest Fibonnaci
 less than or equal to F(n).
 """
-import time
-start_time = time.time()
-
 from math import floor
 from functions.sequences import get_fibonacci
 
-limit = 4e6
-Fn, n = get_fibonacci(limit=limit)
-k = 3 * floor(n / 3)
-answer = int((get_fibonacci(k + 2) - 1) / 2)
+import time
 
-total_time = time.time()-start_time
-print("The answer is {}.\nCalculation took {}ms.".format(answer, total_time))
+def main():
+    start_time = time.time()
+    
+    limit = 4e6
+    Fn, n = get_fibonacci(limit=limit)
+    k = 3 * floor(n / 3)
+    answer = int((get_fibonacci(k + 2) - 1) / 2)
+    
+    total_time = time.time()-start_time
+    print("The answer is {}.\nCalculation took {}s.".format(answer,
+                                                            total_time))
+    
+if __name__ == "__main__":
+    main()
