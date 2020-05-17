@@ -94,6 +94,43 @@ def get_divisors(n):
               "be an integer greater than 1.")
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
+def lcm(a, b):
+    """
+    Returns the least common multiple of two positive integers.
+
+    Parameters
+    ----------
+    a : integer
+        One of the two integers.
+    b : integer
+        One of the two integers.
+
+    Returns
+    -------
+    lcm : integer
+        The least common multiple of a and b
+
+    """
+    if all(map(lambda x: isinstance(x, int), [a, b])):
+        if a >= b:
+            larger, smaller = a, b
+        else:
+            larger, smaller = b, a
+        r = larger % smaller
+        if r == 0:
+            return larger
+        r2 = smaller % r
+        if r2 == 0:
+            return int(larger * smaller / r)
+        elif smaller % r2 == 0:
+            return int(larger * smaller / r2)
+        else:
+            return larger * smaller
+    else:
+        print("ERROR: lcm received invalid input.\nReason: a and b must be",
+              "positive integers.")
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 def largest_multiple_less_than(base, limit):
     """
     Finds the largest multiple strictly less than the indicated limit.
