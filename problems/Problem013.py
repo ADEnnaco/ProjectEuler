@@ -116,7 +116,8 @@ def main():
     start_time = time.time()
 
     url = 'https://projecteuler.net/problem=13'
-    response = requests.get(url)
+    headers = {'user-agent': 'problem solver (andy.ennaco@gmail.com)'}
+    response = requests.get(url, headers=headers)
     
     # make sure we got a valid response
     if(response.ok):

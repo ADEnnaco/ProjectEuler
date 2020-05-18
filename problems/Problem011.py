@@ -51,7 +51,8 @@ def main():
     length = 4
 
     url = 'https://projecteuler.net/problem=11'
-    response = requests.get(url)
+    headers = {'user-agent': 'problem solver (andy.ennaco@gmail.com)'}
+    response = requests.get(url, headers=headers)
     
     # make sure we got a valid response
     if(response.ok):
@@ -97,7 +98,7 @@ def main():
     
     # Answer should be 70600674
     total_time = time.time() - start_time
-    print("Answer: {}.\nCalculation time: {}s.".format(answer, total_time))
+    print("Answer: {}\nCalculation time: {:.3f}s".format(answer, total_time))
     
 if __name__ == "__main__":
     main()
