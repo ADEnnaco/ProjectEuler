@@ -3,6 +3,7 @@
 """
 Functions related to the proprties of integers (e.g. factors and multiples).
 """
+import numpy as np
 from functions.sequences import get_primes
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
@@ -61,7 +62,7 @@ def prime_factorize(n):
             multiplicities.append(1)
         return factors, multiplicities
     else:
-        print("ERROR: prime_factorization received invalid input.\nReason:",
+        print("ERROR: prime_factorization received invalid input.\nREASON:",
               "n must be an integer greater than 1.")
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
@@ -90,8 +91,33 @@ def get_divisors(n):
         divisors.sort()
         return divisors
     else:
-        print("ERROR: get_divisors received invalid input.\nReason: n must",
+        print("ERROR: get_divisors received invalid input.\nREASON: n must",
               "be an integer greater than 1.")
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+def num_divisors(n):
+    """
+    Returns the number of divisors n has, including 1 and n.
+
+    Parameters
+    ----------
+    n : integer
+
+    Returns
+    -------
+    num_divisors : integer
+        The number of positive integer divisors of the number n.
+
+    """
+    if isinstance(n, int) and n > 0:
+        if n == 1:
+            return 1
+        _, multiplicities = prime_factorize(n)
+        num_divisors = np.prod([x + 1 for x in multiplicities])
+        return num_divisors
+    else:
+        print("ERROR: num_divisors received invalid input.\nREASON: n must",
+              "be a positive integer.")
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 def lcm(a, b):
@@ -127,7 +153,7 @@ def lcm(a, b):
         else:
             return larger * smaller
     else:
-        print("ERROR: lcm received invalid input.\nReason: a and b must be",
+        print("ERROR: lcm received invalid input.\nREASON: a and b must be",
               "positive integers.")
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
