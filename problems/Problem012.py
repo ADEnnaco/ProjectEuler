@@ -42,7 +42,7 @@ def main():
             
     # Answer should be 76576500
     total_time = time.time() - start_time
-    print("Answer: {}.\nCalculation time: {}s.".format(answer, total_time))
+    print("Answer: {}.\nCalculation time: {:.3f}s.".format(answer, total_time))
     
 if __name__ == "__main__":
     main()
