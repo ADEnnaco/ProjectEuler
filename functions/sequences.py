@@ -68,6 +68,7 @@ def eratosthene_sieve(primes, sieve):
     """
     check = [True for x in sieve]
     for i in range(1, len(primes)):
+        start_index = 0
         if primes[i] ** 2 > sieve[0]:
             start_index = int((primes[i] ** 2 - sieve[0]) / 2)
             if start_index >= len(sieve):
