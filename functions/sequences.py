@@ -210,3 +210,50 @@ def get_primes2(limit):
               "be numeric and no less than 2.")
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
+def collatz(n):
+    """
+    Returns the next number in the collatz chain.
+
+    Parameters
+    ----------
+    n : integer
+        Current value in the collatz chain.
+
+    Returns
+    -------
+    n : integer
+        Next value in the collatz chain.
+
+    """
+    if isinstance(n, int):
+        return n >> 1 if n&1 == 0 else 3 * n + 1
+    else:
+        print("ERROR: collatz received invalid input.\nREASON: n must be a",
+              "positive integer.")
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+def collatz_chain_length(n, lengths={}):
+    """
+    
+
+    Parameters
+    ----------
+    n : integer
+        The first value of the collatz chain of which you want to compute the
+        length.
+
+    Returns
+    -------
+    length : integer
+        The length of the collatz chain starting at n.
+
+    """
+    if isinstance(n, int):
+        if n == 1:
+            return 0
+        else:
+            lengths[n] = 1 + collatz_chain_length(collatz(n))
+        return lengths[n]
+    else:
+        print("ERROR: collatz_chain_length received invalid input.\nREASON:",
+              "n must be a positive integer.")
