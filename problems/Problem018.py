@@ -60,7 +60,7 @@ def main():
     triangle = soup.find_all('p')[4].get_text()
     rows_list = [row.split(' ') for row in triangle.split('\n')]
     
-    # convert list to numpy array and full empty cells with zeroes
+    # convert list to numpy array and fill empty cells with zeroes
     tri_array = np.array([a + [0 for i in range(len(rows_list)-len(a))] \
                           for a in rows_list], dtype=int)
     
