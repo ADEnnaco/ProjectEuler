@@ -23,7 +23,7 @@ def main():
     start_time = time.time()
     
     answer  = 0
-    for n in range(1001):
+    for n in range(1,1001):
         n_string = num2text(n).replace(" ","").replace("-","")
         n_length = len(n_string)
         answer += n_length
