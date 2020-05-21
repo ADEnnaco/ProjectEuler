@@ -27,7 +27,7 @@ def main():
             n_fact = int(str(n_fact).strip('0'))
     
     answer = sum([int(digit) for digit in str(n_fact)])
-    # Answer should be ***
+    # Answer should be 648
     total_time = time.time() - start_time
     print("Answer: {}\nCalculation time: {:.3f}s".format(answer, total_time))
     
