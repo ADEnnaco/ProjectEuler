@@ -120,6 +120,30 @@ def num_divisors(n):
               "be a positive integer.")
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
+def isprime(n):
+    """
+    Determines whether or not the input is prime.
+
+    Parameters
+    ----------
+    n : integer
+        
+
+    Returns
+    -------
+    prime : bool
+        True if n is a prime integer and False otherwise.
+
+    """
+    if isinstance(n, int) and n > 1:
+        if n in [2,3]: return True
+        for p in get_primes(n ** 0.5):
+            if n % p == 0: return False
+        return True
+    else:
+        return False
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 def lcm(a, b):
     """
     Returns the least common multiple of two positive integers.
@@ -184,3 +208,36 @@ def largest_multiple_less_than(base, limit):
     else:
         print("ERROR: largest_multiple_less_than received invalid input.",
               "\nREASON: base must be an integer and limit must be numeric.")
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+def defperfabund(n):
+    """
+    Finds the sum of the proper divisors of an integer and returns whether the
+    number is deficient, perfect, or abundant.
+
+    Parameters
+    ----------
+    n : integer
+        The integer to be classified.
+
+    Returns
+    -------
+    num_type : string
+        'deficient': sum of proper divisors < n
+        'perfect': sum of proper divisors = n
+        'abundant': sum of proper divisots > n
+
+    """
+    if isinstance(n, int) and n > 1:
+        if n >= 12 and n % 6 == 0:
+            return 'abundant'
+        sum_divisors = sum(get_divisors(n)[:-1])
+        if sum_divisors < n:
+            return 'deficient'
+        elif sum_divisors == n:
+            return 'perfect'
+        else:
+            return 'abundant'
+    else:
+        print("ERROR: defperfabund received invalid input.\nREASON: n must be",
+              "an integer greater than 1.")
