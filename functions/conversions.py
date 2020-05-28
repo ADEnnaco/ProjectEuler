@@ -71,7 +71,8 @@ def num2text(number):
         return number_as_text
     else: print("ERROR: num2test received invalid input.\nREASON: number must",
               "be a positive integer less than or equal to 1000.")
-
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 def string2score(string):
     """
     Returns the sum of the alphabetical positions of the letters in a string.
@@ -100,3 +101,32 @@ def string2score(string):
         return score
     else: print("ERROR: string2score received invalid input.\nREASON: string",
                 "be a string. DUH")
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+def sum_digit_power(n, power):
+    """
+    Raises each digit of the input to the given power and then takes the sum.
+    
+    Ex: sum_digit_powers(247, 3) = 2^3 + 4^3 + 7^3 = 415
+
+    Parameters
+    ----------
+    n : integer
+        The input integer whose digits will be sum-powered.
+    
+    power : integer
+        The exponent each digit is raised to.
+    Returns
+    -------
+    digit_power_sum : integer
+        The result of the described operation.
+
+    """
+    if isinstance(n, int) and isinstance(power, (int, float)):
+        digit_power_sum = 0
+        for digit in str(n):
+            digit_power_sum += int(digit) ** power
+        return digit_power_sum
+    else:
+        print("ERROR: sum_digit_power received invalid input.\nREASON: n must",
+              "be a positive integer and power must be numeric.")
