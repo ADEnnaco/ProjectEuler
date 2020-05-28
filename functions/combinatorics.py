@@ -4,6 +4,8 @@
 Functions for combining and permuting.
 
 """
+import numpy as np
+
 def permutate(string):
     """
     Returns all of the unique permutations of the alphanumeric characters of a
@@ -77,3 +79,35 @@ def digit_combos(n, start=0, stop=9):
     else:
         print("ERROR: digit_combos received invalid input.\nREASON: n, start,",
               "and stop must all be integers.")
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+def monetary_combos(tot, denom):
+    """
+    Calculates the number of ways to make a given amount of money using the 
+    denominations provided.
+
+    Parameters
+    ----------
+    total : integer
+        The amount of money to be represented in the lowest base unit.
+    denominations : list of integers
+        The denominations available to construct the total with.
+
+    Returns
+    -------
+    combinations : integer
+        The number of ways to make the indicated total using the denominations
+        provided.
+
+    """
+    if all(map(lambda x: isinstance(x, int), [tot] + [y for y in denom])):
+        combo_array = np.zeros((tot + 1, len(denom)), dtype=int)
+        combo_array[0][0] = 1
+        for amt in range(1, tot + 1):
+            for i, coin in enumerate([x for x in denom if x <= tot]):
+                combo_array[amt][i] = np.sum(combo_array[amt - coin][:i + 1])
+                combinations = np.sum(combo_array[tot])
+        return combinations
+    else:
+        print("ERROR: monetary_combos received invalid input.\nREASON: total",
+              "and all denominations must be integers.")
