@@ -41,7 +41,7 @@ def permutate(string):
               "be a string.")
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
-def digit_combos(n, start=0, stop=9):
+def digit_combos(n, digits=[0,1,2,3,4,5,6,7,8,9]):
     """
     Returns all the possible unique combinations of digits of length n.
     
@@ -67,14 +67,14 @@ def digit_combos(n, start=0, stop=9):
         Each possible combination, as a string to preserve leading zeros.
         Combinations will all be given in ascending order.
     """
-    if all(map(lambda x: isinstance(x, int), [n, start, stop])):
+    if all(map(lambda x: isinstance(x, int), [n] + [y for y in digits])):
         if n == 1:
-            return [str(x) for x in range(start, stop + 1)]
+            return [str(x) for x in digits]
         else:
             combos = []
-            for sub_combo in digit_combos(n-1, start, stop):
-                for i in range(start, int(sub_combo[0])+1):
-                    combos.append(str(i) + sub_combo)
+            for sub_combo in digit_combos(n-1, digits):
+                for i in range(digits.index(int(sub_combo[0])) + 1):
+                    combos.append(str(digits[i]) + sub_combo)
             return combos
     else:
         print("ERROR: digit_combos received invalid input.\nREASON: n, start,",
