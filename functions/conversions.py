@@ -157,5 +157,5 @@ def sum_digit_factorial(n):
             digit_factorial_sum += factorial(int(digit))
         return digit_factorial_sum
     else:
-        print("ERROR: sum_digit_power received invalid input.\nREASON: n must",
+        print("ERROR: sum_digit_factorial received invalid input.\nREASON: n must",
               "be a positive integer and power must be numeric.")
