@@ -181,6 +181,33 @@ def lcm(a, b):
               "positive integers.")
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
+def gcf(a, b):
+    """
+    Returns the greatest common factor of two positive integers.
+
+    Parameters
+    ----------
+    a : integer
+        One of the two integers.
+    b : integer
+        One of the two integers.
+
+    Returns
+    -------
+    gcf : integer
+        The greatest common factor of a and b.
+
+    """
+    if all(map(lambda x: isinstance(x, int), [a, b])):
+        a_divisors = get_divisors(a)
+        b_divisors = get_divisors(b)
+        gcf = max([x for x in a_divisors if x in b_divisors])
+        return gcf
+    else:
+        print("ERROR: gcf received invalid input.\nREASON: a and b must be",
+              "positive integers.")
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 def largest_multiple_less_than(base, limit):
     """
     Finds the largest multiple strictly less than the indicated limit.
