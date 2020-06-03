@@ -4,6 +4,8 @@
 Functions for converting between different units or data types
 
 """
+from math import factorial
+
 def num2text(number):
     """
     Converts a positive integer less than or equal to 1000 into text.
@@ -127,6 +129,33 @@ def sum_digit_power(n, power):
         for digit in str(n):
             digit_power_sum += int(digit) ** power
         return digit_power_sum
+    else:
+        print("ERROR: sum_digit_power received invalid input.\nREASON: n must",
+              "be a positive integer and power must be numeric.")
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+def sum_digit_factorial(n):
+    """
+    Finds the factorial of each digit of a number and then takes the sum.
+    
+    Ex: sum_digit_factorial(247) = 2! + 4! + 7! = 5066
+
+    Parameters
+    ----------
+    n : integer
+        The input integer whose digits will be sum-powered.
+
+    Returns
+    -------
+    digit_factorial_sum : integer
+        The result of the described operation.
+
+    """
+    if isinstance(n, int):
+        digit_factorial_sum = 0
+        for digit in str(n):
+            digit_factorial_sum += factorial(int(digit))
+        return digit_factorial_sum
     else:
         print("ERROR: sum_digit_power received invalid input.\nREASON: n must",
               "be a positive integer and power must be numeric.")
